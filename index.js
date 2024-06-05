@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const app = express();
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -106,8 +106,7 @@ app.post('/ussd', (req, res) => {
                 phone_number: phoneNumber,
                 user_name: userNames[phoneNumber],
                 language_used: userLanguages[phoneNumber],
-                voted_candidate: candidateNames[candidateIndex],
-                created_at: created at
+                voted_candidate: candidateNames[candidateIndex]
             };
 
             const query = 'INSERT INTO votes SET ?';
