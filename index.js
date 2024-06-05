@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const app = express();
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -11,8 +11,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const db = mysql.createConnection({
     host: 'bdqhkrtatoqrzc9mvw10-mysql.services.clever-cloud.com',
     user: 'uli0c6kzqscfp2gz',
-    password: 'iRnqEollaydTw9VqJpNN', // Replace with your MySQL password
-    database: 'bdqhkrtatoqrzc9mvw10'
+    password: 'iRnqEollaydTw9VqJpNN', 
+    database: 'bdqhkrtatoqrzc9mvw10',
+    port: 3306 // Ensure the correct port is specified
 });
 
 // Connect to the database
@@ -109,10 +110,12 @@ app.post('/ussd', (req, res) => {
                 voted_candidate: candidateNames[candidateIndex]
             };
 
-            const query = 'INSERT INTO votes SET ?';
-            db.query(query, voteData, (err, result) => {
+            const insertVoteQuery = 'INSERT INTO votes SET ?';
+            db.query(insertVoteQuery, voteData, (err, result) => {
                 if (err) {
                     console.error('Error inserting data into database:', err.stack);
+                } else {
+                    console.log('Vote record inserted successfully.');
                 }
             });
         } else {
