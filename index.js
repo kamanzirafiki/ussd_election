@@ -107,7 +107,7 @@ app.post('/ussd', (req, res) => {
                 user_name: userNames[phoneNumber],
                 language_used: userLanguages[phoneNumber],
                 voted_candidate: candidateNames[candidateIndex],
-                created_at: created at;
+                created_at: created at
             };
 
             const query = 'INSERT INTO votes SET ?';
